@@ -14,10 +14,14 @@ import uk.techboystore.certificationsystem.modules.students.usercases.VerifyIfHa
 public class StudentController {
     @Autowired
     private VerifyIfHasCertificationUseCase verifyIfHasCertificationUseCase;
-    
+
     @PostMapping("/verify-certification")
     public String verifyCertificaiton(@RequestBody VerifyCertificationDto verifyCertification) {
-        System.out.println(verifyIfHasCertificationUseCase.execute(verifyCertification));
-        return "test";
+        var result = verifyIfHasCertificationUseCase.execute(verifyCertification);
+
+        if (result) {
+            return "Ja fez a prova";
+        }
+        return "Pode fazer a prova";
     }
 }
